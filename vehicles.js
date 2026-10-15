@@ -5,7 +5,7 @@
 const CONFIG = {
   whatsapp: "5492262369862",
   logo: "img/logo-fusion-cars.png",
-  heroImage: "img/honda-crv-hero.webp",
+  heroImage: "img/hero-honda-crv.webp",
   instagram: "fusioncars.automotores",
   direccion: "",          // [PENDIENTE] ej: "Calle 00 nº 0000, Ciudad"
   mapsUrl: "",            // link de Google Maps

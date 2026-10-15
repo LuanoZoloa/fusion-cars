@@ -48,20 +48,19 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .nav .nav-cta:hover{border-color:var(--text)}
 
 /* ---------- HERO ---------- */
-.hero{position:relative;min-height:min(92svh,920px);display:flex;align-items:center;padding:120px 0 48px;overflow:hidden}
-.hero-grid{display:grid;grid-template-columns:5fr 7fr;align-items:center;gap:24px;position:relative}
-.hero-copy{position:relative;z-index:2}
-.hero h1{font-size:clamp(44px,6.4vw,92px);line-height:.98;font-weight:500;letter-spacing:-.035em;margin:0}
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:120px 0 96px;overflow:hidden;isolation:isolate;text-align:center}
+.hero-bg{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;object-position:62% 55%;transform:scale(1.06);animation:heroIn 1.6s var(--ease) both}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:
+  radial-gradient(60% 55% at 50% 50%,rgba(10,10,10,.35) 0%,rgba(10,10,10,.62) 100%),
+  linear-gradient(180deg,rgba(17,17,17,.55) 0%,rgba(17,17,17,.25) 35%,rgba(17,17,17,.45) 70%,var(--bg) 100%)}
+@keyframes heroIn{from{opacity:0;transform:scale(1.12)}to{opacity:1;transform:scale(1.06)}}
+.hero-copy{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
+.hero h1{font-size:clamp(46px,7.4vw,112px);line-height:.96;font-weight:500;letter-spacing:-.04em;margin:0;max-width:12ch;text-shadow:0 2px 30px rgba(0,0,0,.35)}
 .btn{display:inline-flex;align-items:center;gap:12px;height:56px;padding:0 28px;border-radius:999px;font-weight:500;font-size:15px;transition:transform .3s var(--ease),background .3s,box-shadow .3s}
 .btn-primary{background:var(--accent);color:var(--on-accent);margin-top:44px}
 .btn-primary:hover{transform:translateY(-2px);background:#fff;box-shadow:0 14px 34px -14px rgba(255,255,255,.35)}
 .btn svg{width:18px;height:18px;transition:transform .3s var(--ease)}
 .btn:hover svg{transform:translateY(2px)}
-.hero-stage{position:relative;margin-right:calc(var(--gutter) * -1.6);aspect-ratio:16/9;display:flex;align-items:flex-end;justify-content:center}
-.hero-stage::before{content:"";position:absolute;inset:-35% -20% -18% -25%;background:radial-gradient(50% 50% at 50% 55%,rgba(150,150,150,.34) 0%,rgba(110,110,110,.2) 38%,rgba(80,80,80,.08) 62%,transparent 80%);pointer-events:none}
-.hero-stage .floor{position:absolute;left:4%;right:2%;bottom:-3%;height:16%;background:radial-gradient(50% 50% at 50% 50%,rgba(0,0,0,.55),transparent 75%);filter:blur(10px)}
-.hero-stage .floor::after{content:"";position:absolute;left:10%;right:8%;top:38%;height:30%;background:radial-gradient(50% 50% at 50% 50%,rgba(0,0,0,.9),transparent 80%);filter:blur(4px)}
-.hero-stage .vehicle{position:relative;width:100%;height:auto;z-index:1;filter:drop-shadow(0 22px 22px rgba(0,0,0,.45))}
 
 /* ---------- CATÁLOGO ---------- */
 .section{padding:clamp(96px,12vw,160px) 0}
@@ -141,14 +140,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 /* ---------- RESPONSIVE ---------- */
 @media (max-width:1024px){
   .grid{grid-template-columns:repeat(2,1fr)}
-  .hero-grid{grid-template-columns:1fr 1fr}
 }
 @media (max-width:760px){
   .nav a:not(.nav-cta){display:none}
-  .hero{min-height:auto;padding:112px 0 64px}
-  .hero-grid{grid-template-columns:1fr;gap:8px}
+  .hero{min-height:92svh;padding:104px 0 64px;align-items:flex-end}
+  .hero-bg{object-position:74% 50%}
+  .hero::before{background:linear-gradient(180deg,rgba(17,17,17,.45) 0%,rgba(17,17,17,.15) 30%,rgba(17,17,17,.55) 62%,var(--bg) 100%)}
   .btn-primary{margin-top:32px;width:100%;justify-content:center}
-  .hero-stage{margin:24px -8% 0;aspect-ratio:16/8}
   .grid{grid-template-columns:1fr}
   .section-head{margin-bottom:36px}
   .filters{overflow-x:auto;flex-wrap:nowrap;width:calc(100% + var(--gutter));padding-right:var(--gutter);scrollbar-width:none}
@@ -180,16 +178,17 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 <main id="top">
 
   <section class="hero">
-    <div class="wrap hero-grid">
+    <picture>
+      <source media="(max-width:760px)" srcset="img/hero-honda-crv-mobile.webp">
+      <img class="hero-bg" src="img/hero-honda-crv.webp" alt="Honda CR-V en la playa" fetchpriority="high">
+    </picture>
+    <div class="wrap">
       <div class="hero-copy reveal">
         <h1>Tenemos tu próximo auto.</h1>
         <a href="#stock" class="btn btn-primary">
           Explorar vehículos
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
         </a>
-      </div>
-      <div class="hero-stage reveal" id="heroStage">
-        <div class="floor"></div>
       </div>
     </div>
   </section>
@@ -303,9 +302,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   if (CONFIG.logo) document.getElementById("logo").innerHTML = `<img src="${CONFIG.logo}" alt="Fusion Cars">`;
 
   /* Hero */
-  document.getElementById("heroStage").insertAdjacentHTML("beforeend",
-    vehicleMedia(CONFIG.heroImage, "Vehículo destacado Fusion Cars", "IMAGEN PROTAGONISTA · PNG TRANSPARENTE PENDIENTE"));
-  if (CONFIG.heroImage) document.querySelector("#heroStage img").loading = "eager";
+  if (CONFIG.heroImage) document.querySelector(".hero-bg").src = CONFIG.heroImage;
 
   /* WhatsApp genéricos */
   document.querySelectorAll("[data-ws]").forEach(a => {
