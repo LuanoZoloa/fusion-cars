@@ -17,7 +17,9 @@
   --text:#EDEDEA;
   --muted:#8E8E8A;
   --dim:#5E5E5B;
-  --accent:#D4572F; /* [PROVISIONAL] reemplazar por el color del logo real */
+  --accent:#EDEDEA; /* logo monocromo: acento blanco cálido */
+  --on-accent:#111111;
+  --error:#E5484D;
   --radius:16px;
   --max:1200px;
   --gutter:clamp(20px,5vw,56px);
@@ -37,7 +39,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .header.solid{background:rgba(17,17,17,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
 .header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:.14em;font-size:14px;text-transform:uppercase}
-.logo img{height:28px;width:auto;object-fit:contain}
+.logo img{height:30px;width:auto;object-fit:contain}
 .logo-mark{width:8px;height:8px;border-radius:50%;background:var(--accent)}
 .nav{display:flex;align-items:center;gap:32px;font-size:14px}
 .nav a{color:var(--muted);transition:color .3s}
@@ -46,13 +48,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .nav .nav-cta:hover{border-color:var(--text)}
 
 /* ---------- HERO ---------- */
-.hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:120px 0 72px;overflow:hidden}
+.hero{position:relative;min-height:min(92svh,920px);display:flex;align-items:center;padding:120px 0 48px;overflow:hidden}
 .hero-grid{display:grid;grid-template-columns:5fr 7fr;align-items:center;gap:24px;position:relative}
 .hero-copy{position:relative;z-index:2}
 .hero h1{font-size:clamp(44px,6.4vw,92px);line-height:.98;font-weight:500;letter-spacing:-.035em;margin:0}
 .btn{display:inline-flex;align-items:center;gap:12px;height:56px;padding:0 28px;border-radius:999px;font-weight:500;font-size:15px;transition:transform .3s var(--ease),background .3s,box-shadow .3s}
-.btn-primary{background:var(--accent);color:#fff;margin-top:44px}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px -12px var(--accent)}
+.btn-primary{background:var(--accent);color:var(--on-accent);margin-top:44px}
+.btn-primary:hover{transform:translateY(-2px);background:#fff;box-shadow:0 14px 34px -14px rgba(255,255,255,.35)}
 .btn svg{width:18px;height:18px;transition:transform .3s var(--ease)}
 .btn:hover svg{transform:translateY(2px)}
 .hero-stage{position:relative;margin-right:calc(var(--gutter) * -1.6);aspect-ratio:16/9;display:flex;align-items:flex-end;justify-content:center}
@@ -74,10 +76,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .card:hover{transform:translateY(-4px);border-color:var(--line-2);background:var(--surface-2)}
 .card-media{position:relative;aspect-ratio:16/10;display:flex;align-items:flex-end;justify-content:center;padding:24px 20px 18px;background:radial-gradient(60% 55% at 50% 60%,rgba(255,255,255,.06),transparent 75%)}
 .card-media::after{content:"";position:absolute;left:14%;right:14%;bottom:14px;height:16px;background:radial-gradient(50% 50% at 50% 50%,rgba(0,0,0,.7),transparent 75%);filter:blur(3px)}
-.card-media .vehicle{position:relative;z-index:1;width:100%;height:100%;object-fit:contain;object-position:bottom;transition:transform .5s var(--ease)}
+.card-media .vehicle{position:absolute;z-index:1;left:22px;top:52px;width:calc(100% - 44px);height:calc(100% - 72px);object-fit:contain;object-position:center bottom;transition:transform .5s var(--ease)}
 .card:hover .vehicle{transform:scale(1.03)}
 .tag{position:absolute;top:16px;left:16px;z-index:2;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line-2);padding:4px 10px;border-radius:999px}
-.tag.demo{right:16px;left:auto;color:var(--accent);border-color:rgba(212,87,47,.35)}
+.tag.demo{right:16px;left:auto;color:var(--text);border-color:rgba(255,255,255,.3)}
 .card-body{padding:22px 22px 22px;display:flex;flex-direction:column;flex:1;border-top:1px solid var(--line)}
 .card-brand{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .card-model{font-size:20px;font-weight:500;letter-spacing:-.01em;margin-top:4px;line-height:1.25}
@@ -90,6 +92,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .btn-ws{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 16px;border-radius:999px;font-size:14px;font-weight:500;border:1px solid var(--line-2);transition:all .3s var(--ease);white-space:nowrap}
 .btn-ws svg{width:16px;height:16px}
 .btn-ws:hover{background:var(--text);color:var(--bg);border-color:var(--text)}
+#stock{padding-top:clamp(56px,7vw,104px)}
 .empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:60px 0}
 
 /* ---------- BÚSQUEDA ---------- */
@@ -105,7 +108,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .field input::placeholder{color:var(--dim)}
 .field input:hover{border-color:var(--line-2)}
 .field input:focus{border-color:rgba(255,255,255,.35);background:var(--surface-2)}
-.field.error input{border-color:var(--accent)}
+.field.error input{border-color:var(--error)}
 .form-divider{grid-column:1/-1;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);padding-top:12px}
 .form-foot{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:8px}
 .form-foot .btn-primary{margin-top:0}
@@ -313,7 +316,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
   const card = (v) => {
     const name = `${v.marca} ${v.modelo}`;
-    const specs = [v.anio, fmtKm(v.km)].filter(Boolean);
+    const specs = [v.anio, fmtKm(v.km), v.nota].filter(Boolean);
     const price = fmtPrice(v.precio, v.moneda);
     const msg = `Hola Fusion Cars, quería consultar por el ${name}${v.anio ? " " + v.anio : ""}.`;
     return `
@@ -326,7 +329,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
         <div class="card-body">
           <span class="card-brand">${v.marca}</span>
           <h3 class="card-model">${v.modelo}</h3>
-          <div class="card-specs">${specs.length ? specs.map(s => `<span>${s}</span>`).join("") : `<span>Año y kilometraje a confirmar</span>`}</div>
+          <div class="card-specs">${specs.length ? specs.map(s => `<span>${s}</span>`).join("") : `<span>Datos a confirmar</span>`}</div>
           <div class="card-foot">
             ${price ? `<span class="price">${price}</span>` : `<span class="price ask">Precio a consultar</span>`}
             <a class="btn-ws" href="${waLink(msg)}" target="_blank" rel="noopener">
