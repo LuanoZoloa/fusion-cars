@@ -49,8 +49,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:120px 0 72px;overflow:hidden}
 .hero-grid{display:grid;grid-template-columns:5fr 7fr;align-items:center;gap:24px;position:relative}
 .hero-copy{position:relative;z-index:2}
-.hero h1{font-size:clamp(44px,6.4vw,92px);line-height:.98;font-weight:500;letter-spacing:-.035em;margin:28px 0 24px}
-.hero p{font-size:clamp(17px,1.4vw,19px);color:var(--muted);max-width:30ch}
+.hero h1{font-size:clamp(44px,6.4vw,92px);line-height:.98;font-weight:500;letter-spacing:-.035em;margin:0}
 .btn{display:inline-flex;align-items:center;gap:12px;height:56px;padding:0 28px;border-radius:999px;font-weight:500;font-size:15px;transition:transform .3s var(--ease),background .3s,box-shadow .3s}
 .btn-primary{background:var(--accent);color:#fff;margin-top:44px}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px -12px var(--accent)}
@@ -60,13 +59,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .hero-stage::before{content:"";position:absolute;inset:-10% -5% 0;background:radial-gradient(52% 48% at 52% 62%,rgba(255,255,255,.075),transparent 70%);pointer-events:none}
 .hero-stage .floor{position:absolute;left:8%;right:4%;bottom:5%;height:14%;background:radial-gradient(50% 50% at 50% 50%,rgba(0,0,0,.75),transparent 72%);filter:blur(6px)}
 .hero-stage .vehicle{position:relative;width:100%;height:auto;z-index:1}
-.hero-meta{position:absolute;left:0;right:0;bottom:36px;z-index:2}
-.hero-meta .wrap{display:flex;justify-content:space-between;font-size:12px;color:var(--dim);letter-spacing:.08em;text-transform:uppercase}
 
 /* ---------- CATÁLOGO ---------- */
 .section{padding:clamp(96px,12vw,160px) 0}
 .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap;margin-bottom:56px}
-.section h2{font-size:clamp(36px,4.6vw,64px);line-height:1;font-weight:500;letter-spacing:-.03em;margin-top:18px}
+.section h2{font-size:clamp(36px,4.6vw,64px);line-height:1;font-weight:500;letter-spacing:-.03em}
+.close h2,.request h2{margin-top:18px}
 .filters{display:flex;gap:8px;flex-wrap:wrap}
 .filter{height:40px;padding:0 18px;border-radius:999px;border:1px solid var(--line-2);font-size:14px;color:var(--muted);transition:all .3s var(--ease)}
 .filter:hover{color:var(--text);border-color:rgba(255,255,255,.3)}
@@ -93,6 +91,25 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .btn-ws svg{width:16px;height:16px}
 .btn-ws:hover{background:var(--text);color:var(--bg);border-color:var(--text)}
 .empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:60px 0}
+
+/* ---------- BÚSQUEDA ---------- */
+.request{border-top:1px solid var(--line)}
+.request-inner{display:grid;grid-template-columns:5fr 7fr;gap:64px;align-items:start}
+.request-intro p{color:var(--muted);font-size:18px;max-width:30ch;margin-top:20px}
+.form{display:grid;grid-template-columns:repeat(2,1fr);gap:20px 16px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field.full{grid-column:1/-1}
+.field label{font-size:13px;color:var(--muted);display:flex;justify-content:space-between}
+.field label em{font-style:normal;color:var(--dim);font-size:12px}
+.field input{height:54px;padding:0 18px;border-radius:12px;background:var(--surface);border:1px solid var(--line);color:var(--text);font:inherit;font-size:16px;transition:border-color .3s,background .3s;outline:none;-webkit-appearance:none}
+.field input::placeholder{color:var(--dim)}
+.field input:hover{border-color:var(--line-2)}
+.field input:focus{border-color:rgba(255,255,255,.35);background:var(--surface-2)}
+.field.error input{border-color:var(--accent)}
+.form-divider{grid-column:1/-1;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);padding-top:12px}
+.form-foot{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:8px}
+.form-foot .btn-primary{margin-top:0}
+.form-note{font-size:13px;color:var(--dim)}
 
 /* ---------- CIERRE ---------- */
 .close{border-top:1px solid var(--line)}
@@ -124,16 +141,17 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   .nav a:not(.nav-cta){display:none}
   .hero{min-height:auto;padding:112px 0 64px}
   .hero-grid{grid-template-columns:1fr;gap:8px}
-  .hero h1{margin:20px 0 18px}
   .btn-primary{margin-top:32px;width:100%;justify-content:center}
   .hero-stage{margin:24px -8% 0;aspect-ratio:16/8}
-  .hero-meta{display:none}
   .grid{grid-template-columns:1fr}
   .section-head{margin-bottom:36px}
   .filters{overflow-x:auto;flex-wrap:nowrap;width:calc(100% + var(--gutter));padding-right:var(--gutter);scrollbar-width:none}
   .filters::-webkit-scrollbar{display:none}
   .filter{flex:none}
   .close-inner{grid-template-columns:1fr;gap:8px}
+  .request-inner{grid-template-columns:1fr;gap:40px}
+  .form{grid-template-columns:1fr}
+  .form-foot{flex-direction:column-reverse;align-items:stretch}
   .contact-list{grid-template-columns:1fr;gap:28px;margin-top:64px}
 }
 </style>
@@ -158,9 +176,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy reveal">
-        <span class="eyebrow">Fusion Cars · Vehículos seleccionados</span>
-        <h1>Encontrá tu próximo auto.</h1>
-        <p>Una selección para acompañar tu próximo camino.</p>
+        <h1>Tenemos tu próximo auto.</h1>
         <a href="#stock" class="btn btn-primary">
           Explorar vehículos
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
@@ -170,21 +186,55 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
         <div class="floor"></div>
       </div>
     </div>
-    <div class="hero-meta">
-      <div class="wrap"><span>Stock seleccionado</span><span>Consultas por WhatsApp</span></div>
-    </div>
   </section>
 
   <section class="section" id="stock">
     <div class="wrap">
       <div class="section-head reveal">
-        <div>
-          <span class="eyebrow">Stock disponible</span>
-          <h2>Encontrá el indicado.</h2>
-        </div>
+        <h2>Tenemos el indicado.</h2>
         <div class="filters" id="filters" role="tablist" aria-label="Filtrar por tipo"></div>
       </div>
       <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section class="section request" id="busqueda">
+    <div class="wrap request-inner">
+      <div class="request-intro reveal">
+        <span class="eyebrow">Búsqueda personalizada</span>
+        <h2>¿No encontrás tu auto?</h2>
+        <p>Decinos qué estás buscando y te respondemos por WhatsApp.</p>
+      </div>
+      <form class="form reveal" id="requestForm" novalidate>
+        <div class="field">
+          <label for="fMarca">Marca <em>Obligatorio</em></label>
+          <input id="fMarca" name="marca" type="text" placeholder="Ej: Toyota" autocomplete="off" required>
+        </div>
+        <div class="field">
+          <label for="fModelo">Modelo <em>Obligatorio</em></label>
+          <input id="fModelo" name="modelo" type="text" placeholder="Ej: Corolla" autocomplete="off" required>
+        </div>
+        <span class="form-divider">Opcional</span>
+        <div class="field">
+          <label for="fAnio">Año</label>
+          <input id="fAnio" name="anio" type="text" inputmode="numeric" placeholder="Ej: 2018 en adelante" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="fKm">Kilometraje</label>
+          <input id="fKm" name="km" type="text" inputmode="numeric" placeholder="Ej: hasta 80.000 km" autocomplete="off">
+        </div>
+        <div class="field full">
+          <label for="fColor">Color</label>
+          <input id="fColor" name="color" type="text" placeholder="Ej: gris o blanco" autocomplete="off">
+        </div>
+        <div class="form-foot">
+          <span class="form-note">Se abre WhatsApp con tu consulta lista para enviar.</span>
+          <button type="submit" class="btn btn-primary">
+            Enviar consulta
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </form>
     </div>
   </section>
 
@@ -303,6 +353,29 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       render(b.dataset.type);
     });
   } else filtersEl.remove();
+
+  /* Búsqueda personalizada → WhatsApp */
+  const form = document.getElementById("requestForm");
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+    const val = n => form.elements[n].value.trim();
+    let ok = true;
+    ["marca","modelo"].forEach(n => {
+      const f = form.elements[n].closest(".field");
+      const bad = !val(n); f.classList.toggle("error", bad); if (bad) ok = false;
+    });
+    if (!ok) { form.querySelector(".field.error input").focus(); return; }
+    const lines = [
+      "Hola Fusion Cars, estoy buscando un vehículo:",
+      `Marca: ${val("marca")}`,
+      `Modelo: ${val("modelo")}`,
+      val("anio") && `Año: ${val("anio")}`,
+      val("km") && `Kilometraje: ${val("km")}`,
+      val("color") && `Color: ${val("color")}`,
+    ].filter(Boolean);
+    window.open(waLink(lines.join("\n")), "_blank", "noopener");
+  });
+  form.addEventListener("input", e => e.target.closest(".field")?.classList.remove("error"));
 
   /* Contacto */
   const pending = (t) => `<span class="pending">${t}</span>`;
